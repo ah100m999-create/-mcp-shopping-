@@ -1,0 +1,13 @@
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("Shopping-Assistant")
+
+@mcp.tool()
+def search_products(query: str, platform: str) -> str:
+    """البحث عن المنتجات في منصات التسوق"""
+    return f"تم استلام طلبك بنجاح! جاري البحث عن: '{query}' في منصة '{platform}'."
+
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    mcp.run(transport="sse", port=port)
